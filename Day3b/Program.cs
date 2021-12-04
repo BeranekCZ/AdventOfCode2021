@@ -1,6 +1,5 @@
 ﻿string line = string.Empty;
 
-int[] bitSums = null;
 var allLines = File.ReadAllLines("input.txt").ToList();
 var oxygen = new List<string>(allLines);
 var co2 = new List<string>(allLines);
