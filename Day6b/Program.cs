@@ -1,49 +1,41 @@
 ﻿var input = File.ReadAllText("input.txt");
-
 var fishStates = input.Split(',').Select(x => int.Parse(x)).ToList();
 
-var r = fishStates.GroupBy(x => x).Select(g => (state: g.Key, count: fishStates.Count(y => y == g.Key))).OrderByDescending(w => w.state).ToList();
+var fishGroups = fishStates.GroupBy(x => x).Select(g => (state: g.Key, count: fishStates.Count(y => y == g.Key))).OrderByDescending(w => w.state).ToList();
 
-var fishes = new int[9];
+var fishes = new long[9];
 
-int numberOfDays = 18;
-
-foreach (var item in r)
+foreach (var item in fishGroups)
 {
     fishes[item.state] = item.count;
 }
 
 
+int numberOfDays = 256;
 for (int i = 0; i < numberOfDays; i++)
 {
-
-    var tempFishes = new int[9];
-
+    long newBorn = 0;
     for (int s = 0; s < fishes.Length; s++)
     {
         if (s == 0)
         {
-            tempFishes[6] += fishes[s];
-            tempFishes[8] += fishes[s];
+            fishes[7] += fishes[s];
+            newBorn = fishes[s];
         }
         else
         {
-            tempFishes[s - 1] += fishes[s];
-            //if (s == 8) fishes[s] = 0;
-
+            fishes[s - 1] = fishes[s];
+            if (s == 8) fishes[s] = 0;
         }
     }
+    fishes[8] += newBorn;
 
-
-    tempFishes.CopyTo(fishes, 0);
-    
-    //fishes[s - 1] = fishes[s];
     #region debug print
-    foreach (var item in fishes)
-    {
-        Console.Write($"{item} , ");
-    }
-    Console.WriteLine($"-after");
+    //foreach (var item in fishes)
+    //{
+    //    Console.Write($"{item} , ");
+    //}
+    //Console.WriteLine($"-after day {i+1}");
     #endregion
 }
 
