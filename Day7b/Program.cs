@@ -4,8 +4,6 @@ var input = File.ReadAllText("input.txt");
 var positions = input.Split(',').Select(x => int.Parse(x)).OrderBy(x => x).ToList();
 Dictionary<int,int> targetAndCost = new Dictionary<int,int>();
 
-
-
 for (int i = positions.First(); i < positions.Last(); i++)
 {
     targetAndCost.Add(i,GetFuelCost(positions, i));
@@ -13,7 +11,7 @@ for (int i = positions.First(); i < positions.Last(); i++)
 
 //no prutal force version
 //var avg = positions.Average(x => x);
-//var cost = GetFuelCost(positions, (int)avg);
+//var cost = GetFuelCost(positions, (int)Math.Round(avg));
 
 Console.WriteLine($"Result: {targetAndCost.Values.Min()}");
 
