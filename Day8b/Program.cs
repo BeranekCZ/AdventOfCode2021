@@ -1,4 +1,7 @@
-﻿var input = File.ReadAllLines("input.txt");
+﻿//INCOMPLETE
+
+
+var input = File.ReadAllLines("input.txt");
 
 var inputSignals = new List<string>();
 var outputSignals = new List<string>();
